@@ -63,7 +63,7 @@ app.post('/save_to_cache', function(req, res) {
 });
 
 
-app.get('/retrive_from_cache', function(req, res) {
+app.post('/retrive_from_cache', function(req, res) {
 
     console.log(req.body);
 
