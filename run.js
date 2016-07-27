@@ -43,6 +43,9 @@ app.post('/save_to_cache', function(req, res) {
 
         if(result){
 
+
+            console.log("---------Saved---------------\n");
+
             res.send(JSON.stringify({
                 success:true,
                 data:result
@@ -50,9 +53,12 @@ app.post('/save_to_cache', function(req, res) {
 
         }else{
 
+
+            console.log("---------Not Saved---------------\n");
+
             res.send(JSON.stringify({
                 success:false,
-                message:"no data exists"
+                message:"No data saved"
             }, null, 3));
 
         }
