@@ -36,7 +36,7 @@ app.post('/save_to_cache', function(req, res) {
         if( err ){
             res.send("no data found");
         }else{
-            res.send(result);
+            res.send("the data is");
         }
         memcached.end();
     });
