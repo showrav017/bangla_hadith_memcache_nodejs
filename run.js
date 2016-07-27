@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 
 var app = express();
 app.use(bodyParser.json());       // to support JSON-encoded bodies
+var memcached = new Memcached('162.243.118.37:11211');
 
 /*app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
@@ -11,14 +12,14 @@ app.use(bodyParser.json());       // to support JSON-encoded bodies
 */
 
 /*
-var memcached = new Memcached('162.243.118.37:11211');
-memcached.set('foo', 'bar', 10, function (err) {
-    memcached.get( "foo", function( err, result ){
-        if( err ) console.error( err );
-        console.dir( result );
-        memcached.end();
-    });
-});
+
+ memcached.set('foo', 'bar', 10, function (err) {
+ memcached.get( "foo", function( err, result ){
+ if( err ) console.error( err );
+ console.dir( result );
+ memcached.end();
+ });
+ });
 */
 
 app.get('/', function (req, res) {
@@ -30,7 +31,17 @@ app.post('/save_to_cache', function(req, res) {
     //    color = req.body.color;
 
     console.log(req.body);
-    res.send('hi');
+
+    memcached.get( "foo", function( err, result ){
+        if( err ){
+            res.send("no data found");
+        }else{
+            res.send(result);
+        }
+        memcached.end();
+    });
+
+    //res.send('hi');
 });
 
 
