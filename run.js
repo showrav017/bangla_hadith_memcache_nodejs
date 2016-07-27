@@ -22,6 +22,8 @@ var memcached = new Memcached('162.243.118.37:11211');
  });
 */
 
+var ExpiredSeconds = 10;
+
 app.get('/', function (req, res) {
     res.send('Hello World!');
 });
@@ -32,7 +34,7 @@ app.post('/save_to_cache', function(req, res) {
 
     console.log(req.body);
 
-    memcached.get( "foo", function( err, result ){
+    memcached.set(req.body.key, req.body.value, ExpiredSeconds, function( err, result ){
         if( err ) console.error( err );
 
         res.setHeader('Content-Type', 'application/json');
@@ -56,16 +58,40 @@ app.post('/save_to_cache', function(req, res) {
         memcached.end();
     });
 
+
     //res.send('hi');
 });
 
 
 app.post('/retrive_from_cache', function(req, res) {
-    //var name = req.body.name,
-    //    color = req.body.color;
 
     console.log(req.body);
-    res.send('Get data from cache');
+
+    memcached.get(req.body.key,function(err, result)
+    {
+        if( err ) console.error( err );
+
+        res.setHeader('Content-Type', 'application/json');
+
+        if(result){
+
+            res.send(JSON.stringify({
+                success:true,
+                data:result
+            }, null, 3));
+
+        }else{
+
+            res.send(JSON.stringify({
+                success:false,
+                message:"no data exists"
+            }, null, 3));
+
+        }
+
+        memcached.end();
+    });
+
 });
 
 
