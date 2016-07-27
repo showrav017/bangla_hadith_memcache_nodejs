@@ -22,7 +22,7 @@ var memcached = new Memcached('162.243.118.37:11211');
  });
 */
 
-var ExpiredSeconds = 10;
+var ExpiredSeconds = 10000;
 
 app.get('/', function (req, res) {
     res.send('Hello World!');
