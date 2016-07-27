@@ -7,7 +7,6 @@ app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
-app.use(express.urlencoded());
 
 /*
 var memcached = new Memcached('162.243.118.37:11211');
@@ -28,9 +27,18 @@ app.post('/save_to_cache', function(req, res) {
     //var name = req.body.name,
     //    color = req.body.color;
 
-    console.log(req.body)
+    console.log(req.body);
+    res.send('Save Cache Data');
 });
 
+
+app.post('/retrive_from_cache', function(req, res) {
+    //var name = req.body.name,
+    //    color = req.body.color;
+
+    console.log(req.body);
+    res.send('Get data from cache');
+});
 
 
 app.listen(3350, function () {
