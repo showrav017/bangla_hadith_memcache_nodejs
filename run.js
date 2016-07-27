@@ -43,6 +43,6 @@ app.post('/retrive_from_cache', function(req, res) {
 });
 
 
-app.listen(3350, function () {
-    console.log('Example app listening on port 3000!');
+app.listen(80, function () {
+    console.log('Example app listening on port 80!');
 });
