@@ -28,7 +28,7 @@ app.post('/save_to_cache', function(req, res) {
     //    color = req.body.color;
 
     console.log(req.body);
-    res.send('Save Cache Data');
+    res.send('{"success":true}');
 });
 
 
