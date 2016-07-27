@@ -31,7 +31,9 @@ app.get('/', function (req, res) {
 app.post('/save_to_cache', function(req, res) {
     //var name = req.body.name,
     //    color = req.body.color;
-
+    console.log("------------------------\n");
+    console.log("-----------save_to_cache-------------\n");
+    console.log("------------------------\n");
     console.log(req.body);
 
     memcached.set(req.body.key, req.body.value, ExpiredSeconds, function( err, result ){
@@ -65,6 +67,9 @@ app.post('/save_to_cache', function(req, res) {
 
 app.post('/retrive_from_cache', function(req, res) {
 
+    console.log("------------------------\n");
+    console.log("-----------retrive_from_cache-------------\n");
+    console.log("------------------------\n");
     console.log(req.body);
 
     memcached.get(req.body.key,function(err, result)
