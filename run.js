@@ -33,11 +33,26 @@ app.post('/save_to_cache', function(req, res) {
     console.log(req.body);
 
     memcached.get( "foo", function( err, result ){
-        if( err ){
-            res.send("no data found");
+        if( err ) console.error( err );
+
+        res.setHeader('Content-Type', 'application/json');
+
+        if(result){
+
+            res.send(JSON.stringify({
+                success:true,
+                data:result
+            }, null, 3));
+
         }else{
-            res.send("the data is");
+
+            res.send(JSON.stringify({
+                success:false,
+                message:"no data exists"
+            }, null, 3));
+
         }
+
         memcached.end();
     });
 
