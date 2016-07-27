@@ -80,6 +80,8 @@ app.post('/retrive_from_cache', function(req, res) {
 
         if(result){
 
+            console.log("---------Found---------------\n");
+
             res.send(JSON.stringify({
                 id:1,
                 success:true,
@@ -87,6 +89,8 @@ app.post('/retrive_from_cache', function(req, res) {
             }, null, 3));
 
         }else{
+
+            console.log("---------Not Found---------------\n");
 
             res.send(JSON.stringify({
                 success:false,
